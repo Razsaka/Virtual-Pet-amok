@@ -1,23 +1,26 @@
 package pets_amok;
 
-public class VirtualPet {
+public abstract class VirtualPet {
 
     protected String petName;
     protected String petType;
-    protected int fatigue;
     protected int boredom;
     protected int health;
     protected int happiness;
 
 
-    public VirtualPet(String petName, String petType, int fatigue, int boredom) {
+    public VirtualPet(String petName) {
         this.health = 100;
         this.petName = petName;
-        this.petType = petType;
-        this.fatigue = fatigue;
-        this.boredom = boredom;
+        this.petType = "Pet";
+        this.boredom = 10;
         this.happiness= 100;
 
+    }
+
+    public String toString() {
+       return "Name   | Type    | Health   | Happiness\n" +
+        this.petName + "   | " + this.petType + "   | " + this.health + "   | " + this.happiness + "\n";
     }
 
     public String getPetName() {
@@ -26,10 +29,6 @@ public class VirtualPet {
 
     public String getPetType() {
         return petType;
-    }
-
-    public int getFatigue() {
-        return fatigue;
     }
 
     public int getBoredom() {
@@ -43,20 +42,19 @@ public class VirtualPet {
     }
 
     public int tick() {
-        fatigue++;
-        boredom++;
-        health--;
+        boredom+= 5;
+        happiness -= 10;
+        if (happiness <= 50) {
+            health -= 10;
+        }
         return 0;
     }
 
-    public void sleep() {
-        fatigue = 0;
-        boredom++;
-        health++;
-    }
+
 
     public void playWith() {
         boredom = 0;
         health++;
+        happiness += 20;
     }
 }

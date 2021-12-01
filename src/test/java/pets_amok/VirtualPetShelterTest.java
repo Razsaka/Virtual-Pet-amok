@@ -2,8 +2,6 @@ package pets_amok;
 
 import org.junit.jupiter.api.Test;
 
-import javax.print.attribute.standard.SheetCollate;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -11,15 +9,23 @@ public class VirtualPetShelterTest {
 
     @Test
     public void shouldAddPet() {
-        VirtualPet newPet = new VirtualPet("Sam", "dog", 5, 4);
+        VirtualPet newPet = new OrganicDog("Sam");
         VirtualPetShelter shelter = new VirtualPetShelter();
         shelter.addPet(newPet);
-        assertTrue(shelter.getAllPets().contains(newPet));
+        assertTrue(shelter.getAllPets().contains (newPet));
+    }
+
+    @Test
+    public void shouldAdoptANewPet() {
+        VirtualPet newPet= new OrganicDog("Yanny");
+        VirtualPetShelter shelter=new VirtualPetShelter();
+        shelter.adoptPet(newPet.getPetName());
+        assertTrue(!shelter.getAllPets().contains(newPet));
     }
 
     @Test
     public void shouldFeedAllPets() {
-        OrganicCat newPet2 = new OrganicCat("Gaf", "cat", 5, 3);
+        OrganicCat newPet2 = new OrganicCat("Gaf");
         VirtualPetShelter shelter = new VirtualPetShelter();
         shelter.addPet(newPet2);
         shelter.feedAllPets();
@@ -28,7 +34,7 @@ public class VirtualPetShelterTest {
 
     @Test
     public void shouldWaterAllPets() {
-        OrganicCat newPet2 = new OrganicCat("Gaf", "cat", 5, 3);
+        OrganicCat newPet2 = new OrganicCat("Gaf");
         VirtualPetShelter shelter = new VirtualPetShelter();
         shelter.addPet(newPet2);
         shelter.waterAllPets();
@@ -37,15 +43,15 @@ public class VirtualPetShelterTest {
 
     @Test
     public void petsAreAlive() {
-        VirtualPet newPet2 = new VirtualPet("Gaf", "cat", 20, 25);
+        VirtualPet newPet2 = new OrganicDog("Gaf");
         VirtualPetShelter shelter = new VirtualPetShelter();
         shelter.addPet(newPet2);
-        assertFalse(shelter.petsAreAlive());
+        assertTrue(shelter.petsAreAlive());
     }
 
     @Test
-    public void shouldSleepAllPets() {
-        VirtualPet newPet2 = new VirtualPet("Next", "cat", 5, 3);
+    public void shouldSleepAllOrganicPets() {
+        OrganicPet newPet2 = new OrganicDog("Next");
         VirtualPetShelter shelter = new VirtualPetShelter();
         shelter.addPet(newPet2);
         shelter.sleep();
@@ -54,41 +60,39 @@ public class VirtualPetShelterTest {
 
     @Test
     public void shouldWalkAllDogs() {
-        OrganicDog newPet2 = new OrganicDog("Gaf", "dog", 5, 3);
-        int oldCageCleanliness = newPet2.getCageCleanliness();
+        OrganicDog newPet2 = new OrganicDog("Gaf");
+        int oldCageCleanliness = newPet2.getWaste();
         int oldHappiness = newPet2.getHappiness();
-        int oldHealth = newPet2.getHealth();
         VirtualPetShelter shelter = new VirtualPetShelter();
         shelter.addPet(newPet2);
         shelter.walkAllDogs();
-        assertTrue(newPet2.getCageCleanliness() > oldCageCleanliness);
+        assertTrue(newPet2.getWaste() < oldCageCleanliness);
         assertTrue(newPet2.getHappiness() > oldHappiness);
-        assertTrue(newPet2.getHealth() > oldHealth);
     }
 
     @Test
     public void shouldCleanAllDogCages() {
-        OrganicDog newPet2 = new OrganicDog("Jog", "dog", 7, 2);
+        OrganicDog newPet2 = new OrganicDog("Jog");
         VirtualPetShelter shelter = new VirtualPetShelter();
         shelter.addPet(newPet2);
         shelter.cleanDogCages();
 
-        assertEquals(100, newPet2.getCageCleanliness());
+        assertEquals(0, newPet2.getWaste());
     }
 
     @Test
     public void shouldCleanAllCatLitterBoxes() {
-        OrganicCat newPet2 = new OrganicCat("Mag", "cat", 5, 6);
+        OrganicCat newPet2 = new OrganicCat("Mag");
         VirtualPetShelter shelter = new VirtualPetShelter();
         shelter.addPet(newPet2);
         shelter.cleanLitterBox();
-        assertEquals(100, newPet2.getLitterCleanliness());
+        assertEquals(0, newPet2.getWaste());
     }
 
     @Test
     public void shouldOilAllRoboticPets() {
-        RobotDog newPet2 = new RobotDog( "Mag", "dog", 5, 6);
-        RobotCat newPet3 = new RobotCat( "Moot", "cat", 5, 6);
+        RobotDog newPet2 = new RobotDog( "Mag");
+        RobotCat newPet3 = new RobotCat( "Moot");
         VirtualPetShelter shelter= new VirtualPetShelter();
         shelter.addPet(newPet2);
         shelter.addPet(newPet3);

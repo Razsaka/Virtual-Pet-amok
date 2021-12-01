@@ -5,16 +5,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DogTest {
-    OrganicDog underTest = new OrganicDog("Bob", "Dog", 5, 5);
+    OrganicDog underTest = new OrganicDog("Bob");
 
     @Test
     public void shouldWalkDog() {
-        int oldCageCleanliness = underTest.getCageCleanliness();
+        int oldUncleanliness = underTest.getWaste();
         int oldHappiness = underTest.getHappiness();
-        int oldHealth = underTest.getHealth();
         underTest.walk();
-        assertEquals(oldCageCleanliness+1, underTest.getCageCleanliness());
-        assertEquals(oldHappiness+5, underTest.getHappiness());
-        assertEquals(oldHealth+1, underTest.getHealth());
+        assertEquals(oldUncleanliness-10, underTest.getWaste());
+        assertEquals(oldHappiness+15, underTest.getHappiness());
     }
 }

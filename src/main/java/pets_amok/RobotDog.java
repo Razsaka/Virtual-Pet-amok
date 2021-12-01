@@ -1,20 +1,14 @@
 package pets_amok;
 
-public class RobotDog extends Dog implements RobotInterface {
-    private int oilLevel;
-    public RobotDog(String petName, String petType, int fatigue, int boredom) {
-        super(petName, petType, fatigue, boredom);
-        oilLevel = 50;
-    }
-
-    public void oil() {
-       oilLevel = 0;
-       health++;
+public class RobotDog extends RoboticPet implements WalkableInterface {
+    public RobotDog(String petName) {
+        super(petName);
+        this.petType = "Robot Dog";
     }
 
     @Override
-    public int getOilLevel() {
-        return oilLevel;
+    public void walk() {
+        happiness += 15;
     }
 }
 
